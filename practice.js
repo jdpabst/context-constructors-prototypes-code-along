@@ -10,7 +10,9 @@
 let user = {
 	username: "bencallis",
 	email: "bencallis1@gmail.com",
-    // Code here
+  getUserName: function(){
+    return this.username;
+  }
 };
 
 
@@ -31,7 +33,7 @@ let user1 = {
 };
 
 const getUsername = function () {
-    // Code here
+    return this.username;
 };
 
 const username = getUsername.call(user1);
@@ -56,7 +58,7 @@ function getOtherUsername() {
 	return this.username;
 };
 
-// Code here
+const otherUsername = getOtherUsername.call(user2)
 
 
 
@@ -71,7 +73,8 @@ function getOtherUsername() {
   username2 results in a value of "BillyBob"
 */
 
-// Code here
+const username1 = getOtherUsername.call(user1);
+const username2 = getOtherUsername.call(user2);
 
 
 
@@ -93,7 +96,7 @@ function add(a, b, c) {
 	return this.num + a + b + c;
 }
 
-// Code here
+const result = add.apply(obj, nums)
 
 
 
@@ -115,7 +118,7 @@ const getName = function () {
 	return this.name;
 };
 
-// Code here
+const name = getName.bind(favRapper);
 
 
 
@@ -129,7 +132,9 @@ const getName = function () {
 */
 
 function Car (color, make, year){
-    // Code here
+    this.color = color;
+    this.make = make;
+    this.year = year;
 }
 
 
@@ -147,9 +152,11 @@ function CarMaker (make, model, year) {
 	this.make = make;
 	this.model = model;
 	this.year = year;
-    this.move = 0;
+  this.move = 0;
     
-    // Code here
+  this.moveCar = function(){
+    return this.move += 10;
+  }
 };
 
 
@@ -165,7 +172,15 @@ function CarMaker (make, model, year) {
   This number parameter should be added to the player's pointsScored value and should then return that same updated pointsScored value
 */
 
-// Code here
+function Player(name, age, team, pointsScored){
+  this.name = name;
+  this.age = age;
+  this.team = team;
+  this.pointsScored = pointsScored
+  this.addPoints = function(num){
+    return this.pointsScored += num;
+  }
+}
 
 
 
@@ -183,13 +198,16 @@ function Restaurant(name, type, stars) {
 	this.type = type;
     this.stars = stars;
     
-    this.addStars = function (num) {
-        this.stars += num;
-        return this.stars;
-    };
+    // this.addStars = function (num) {
+    //     this.stars += num;
+    //     return this.stars;
+    // };
 }
 
-// Code here
+Restaurant.prototype.addStars = function(num){
+  this.stars += num;
+  return this.stars;
+}
 
 
 
@@ -214,7 +232,9 @@ function Person(name, age, hometown, email, friends) {
 	this.friends = friends;
 }
 
-// Code here
+Person.prototype.addFriend = function(str){
+  console.log(this.friends);
+}
 
 
 
