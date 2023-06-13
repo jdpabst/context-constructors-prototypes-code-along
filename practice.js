@@ -233,10 +233,17 @@ function Person(name, age, hometown, email, friends) {
 }
 
 Person.prototype.addFriend = function(str){
-  console.log(this.friends);
+  return this.friends.push(str);
 }
 
-
+Person.prototype.removeFriend = function(str){
+  for(var i = 0; i < this.friends.length; i++){
+    if(this.friends[i] == str){
+      this.friends.splice(i, 1);
+    }
+  }
+  return this.friends;
+}
 
 ////////// PROBLEM 12 //////////
 
@@ -254,30 +261,58 @@ Person.prototype.addFriend = function(str){
   Make sure to name the properties the same as described previously (id, title, rating)
 */
 
-// Code here
+function User(name, age, email, savedPosts){
+  this.name = name;
+  this.age = age;
+  this.email = email;
+  this.savedPosts = savedPosts;
+}
 
-
+User.prototype.addSavedPost = function(id, title, rating){
+  this.savedPosts.push({
+    id: id,
+    title: title,
+    rating: rating
+  })
+}
 
 ////////// PROBLEM 13 //////////
 
 /*
-  Using the User constructor function built as part of Problem 11, write a prototype method named removeSavedPost
+  Using the User constructor function built as part of Problem 12, write a prototype method named removeSavedPost
   This function will take in a number parameter representing the post id
   Use this id to find and remove the matching object from the savedPosts array
 
 */
 
-// Code here
+User.prototype.removeSavedPost = function(num){
+  console.log(`num: ${num}`)
+  for(var i = 0; i < this.savedPosts.length; i++){
+    if(this.savedPosts[i].id === num){
+      console.log(this.savedPosts[i])
+      this.savedPosts.splice(i, 1);
+      i--;
+    }
+  }
+  return this.savedPosts;
+}
 
 
 
 ////////// PROBLEM 14 //////////
 
 /*
-  Using the User constructor function built as part of Problem 11 & 12, write a prototype method named changePostRating
+  Using the User constructor function built as part of Problem 12 & 13, write a prototype method named changePostRating
   This function will take in 2 number parameters: id (a number) and newRating (a number)
   Use this id to find the matching object in the savedPosts array and update its rating with the newRating parameter
 
 */
 
-// Code here
+User.prototype.changePostRating = function(id, newRating){
+  for(var i = 0; i < this.savedPosts.length; i++){
+    if(this.savedPosts[i].id === id){
+      this.savedPosts[i].rating = newRating;
+    }
+  }
+  return this.savedPosts;
+}
